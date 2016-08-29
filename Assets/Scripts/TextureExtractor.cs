@@ -5,12 +5,15 @@ using System.IO;
 public class TextureExtractor : MonoBehaviour {
 
     private byte[] fileData;
+    public int innerRadio = 100;
 
     void Start () {
         fileData = File.ReadAllBytes(Application.dataPath + "/Textures/testTube.jpg");
         Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(fileData);
-        DrawCircle(tex, (int)tex.width/2, (int)tex.height/2, 100, new Color(0, 0, 0));
+        DrawCircle(tex, (int)tex.width/2, (int)tex.height/2, innerRadio, new Color(0, 0, 0));
+
+        //Debug.Log(tex.GetPixel((int)tex.width / 2, 0));
 
         // Encode texture into PNG
         byte[] bytes = tex.EncodeToPNG();
@@ -26,7 +29,11 @@ public class TextureExtractor : MonoBehaviour {
 	
 	}
 
-    public void DrawCircle(Texture2D tex, int cx, int cy, int r, Color col)
+    private void BuildTubeTexture() {
+
+    }
+
+    private void DrawCircle(Texture2D tex, int cx, int cy, int r, Color col)
     {
         int x, y, px, nx, py, ny, d;
         Color32[] tempArray = tex.GetPixels32();
