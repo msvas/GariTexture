@@ -1,16 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class TextureExtractor : MonoBehaviour {
 
-    public TextAsset imageAsset;
+    private byte[] fileData;
 
     void Start () {
+        fileData = File.ReadAllBytes(Application.dataPath + "/Textures/testTube.jpg");
         Texture2D tex = new Texture2D(2, 2);
-        tex.LoadImage(imageAsset.bytes);
-        DrawCircle(tex, (int)tex.width/2, (int)tex.height/2, 5, new Color(0, 0, 0));
+        tex.LoadImage(fileData);
+        DrawCircle(tex, (int)tex.width/2, (int)tex.height/2, 100, new Color(0, 0, 0));
 
+        // Encode texture into PNG
+        byte[] bytes = tex.EncodeToPNG();
 
+        // For testing purposes, also write to a file in the project folder
+        File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", bytes);
 
         GetComponent<Renderer>().material.mainTexture = tex;
     }
