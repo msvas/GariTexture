@@ -15,6 +15,8 @@ public class TextureExtractor : MonoBehaviour {
 
         //Debug.Log(tex.GetPixel((int)tex.width / 2, 0));
 
+        BuildTubeTexture(tex);
+
         // Encode texture into PNG
         byte[] bytes = tex.EncodeToPNG();
 
@@ -29,8 +31,18 @@ public class TextureExtractor : MonoBehaviour {
 	
 	}
 
-    private void BuildTubeTexture() {
+    private void BuildTubeTexture(Texture2D tex) {
+        int newWidth = (int)Mathf.Ceil((tex.height / 2) - innerRadio);
+        int newHeight = (int)Mathf.Ceil(2 * Mathf.PI * (tex.height / 2));
 
+        Texture2D fixedTex = new Texture2D(newWidth, newHeight);
+
+
+    }
+
+    private void ClonePixel(Texture2D from, Texture2D to) {
+        Color pixel = from.GetPixel(0, 0);
+        to.SetPixel(0, 0, pixel);
     }
 
     private void DrawCircle(Texture2D tex, int cx, int cy, int r, Color col)
