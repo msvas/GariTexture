@@ -9,7 +9,7 @@ public class TextureExtractor : MonoBehaviour {
     private Texture2D result;
 
     void Start () {
-        fileData = File.ReadAllBytes(Application.dataPath + "/Textures/circles.png");
+        fileData = File.ReadAllBytes(Application.dataPath + "/Textures/circlesQ.png");
         Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(fileData);
         DrawCircle(tex, (int)tex.width/2, (int)tex.height/2, innerRadio, new Color(0, 0, 0));
