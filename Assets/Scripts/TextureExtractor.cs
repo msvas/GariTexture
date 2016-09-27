@@ -9,7 +9,7 @@ public class TextureExtractor : MonoBehaviour {
     private Texture2D result;
 
     void Start () {
-        fileData = File.ReadAllBytes(Application.dataPath + "/Textures/testTube01.png");
+        fileData = File.ReadAllBytes(Application.dataPath + "/Textures/tuboReal01.jpg");
         Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(fileData);
         DrawCircle(tex, (int)tex.width/2, (int)tex.height/2, innerRadio, new Color(0, 0, 0));
@@ -58,43 +58,52 @@ public class TextureExtractor : MonoBehaviour {
         int ycenter = tex.height / 2;
 
         for (j = innerRadio; j <= r; j++) {
+            factor = (float)r / (float)j;
             k = 0;
-            m = r;
+            m = 2 * r;
             n = 2 * r; 
-            z = 3 * r;
+            z = 4 * r;
             lastk = 0;
             lastm = 0;
             lastz = 0;
             lastn = 0;
-            factor = (float)r / (float)j;
             //factor = 1;
             for (x = 0; x <= j; x++) {
                 int y = (int)Mathf.Ceil(Mathf.Sqrt(j * j - x * x));
 
-                ClonePixel(tex, xcenter + x, ycenter + y, (int)k, j - innerRadio);
-                ClonePixel(tex, xcenter - x, ycenter + y, (int)z, j - innerRadio);
-                ClonePixel(tex, xcenter + x, ycenter - y, (int)m, j - innerRadio);
-                ClonePixel(tex, xcenter - x, ycenter - y, (int)n, j - innerRadio);
+                ClonePixel(tex, xcenter + x, ycenter + y, (int)k, j - innerRadio); //1st
+                ClonePixel(tex, xcenter - x, ycenter + y, (int)z, j - innerRadio); //4th
+                ClonePixel(tex, xcenter + x, ycenter - y, (int)m, j - innerRadio); //2nd
+                ClonePixel(tex, xcenter - x, ycenter - y, (int)n, j - innerRadio); //3rd
                 lastk = k;
                 lastm = m;
                 lastz = z;
                 lastn = n;
                 k += factor;
-                z += factor;
-                m += factor; 
+                z -= factor;
+                m -= factor; 
                 n += factor;
-                FixBlankPixel(lastk, k, tex, xcenter + x, ycenter + y, j - innerRadio);
-                FixBlankPixel(lastz, z, tex, xcenter - x, ycenter + y, j - innerRadio);
-                FixBlankPixel(lastm, m, tex, xcenter + x, ycenter - y, j - innerRadio);
-                FixBlankPixel(lastn, n, tex, xcenter - x, ycenter - y, j - innerRadio);
+                FixBlankPixel(lastk, k, tex, xcenter + x, ycenter + y, j - innerRadio, true);
+                FixBlankPixel(lastz, z, tex, xcenter - x, ycenter + y, j - innerRadio, false);
+                FixBlankPixel(lastm, m, tex, xcenter + x, ycenter - y, j - innerRadio, false);
+                FixBlankPixel(lastn, n, tex, xcenter - x, ycenter - y, j - innerRadio, true);
             }
         }
     }
 
-    private void FixBlankPixel(float last, float now, Texture2D tex, int xorig, int yorig, int ydest) {
-        if(((int)now - (int)last) >= 2) {
-            for(int i = (int)last + 1; i < (int)now; i++) {
-                ClonePixel(tex, xorig, yorig, i, ydest);
+    private void FixBlankPixel(float last, float now, Texture2D tex, int xorig, int yorig, int ydest, bool right) {
+        if (right) {
+            if (((int)now - (int)last) >= 2) {
+                for (int i = (int)last + 1; i < (int)now; i++) {
+                    ClonePixel(tex, xorig, yorig, i, ydest);
+                }
+            }
+        }
+        else {
+            if (((int)last - (int)now) >= 2) {
+                for (int i = (int)last - 1; i > (int)now; i--) {
+                    ClonePixel(tex, xorig, yorig, i, ydest);
+                }
             }
         }
     }
