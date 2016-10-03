@@ -8,25 +8,30 @@ public class TextureExtractor : MonoBehaviour {
     public int innerRadio = 100;
     private Texture2D result;
 
+    public int id;
+
     void Start () {
-        fileData = File.ReadAllBytes(Application.dataPath + "/Textures/tuboReal01.jpg");
-        Texture2D tex = new Texture2D(2, 2);
-        tex.LoadImage(fileData);
-        DrawCircle(tex, (int)tex.width/2, (int)tex.height/2, innerRadio, new Color(0, 0, 0));
+        if(File.Exists(Application.dataPath + "/Textures/tuboReal" + id.ToString("D3") + ".jpg")) { 
+            fileData = File.ReadAllBytes(Application.dataPath + "/Textures/tuboReal" + id.ToString("D3") + ".jpg");
+            Texture2D tex = new Texture2D(2, 2);
+            tex.LoadImage(fileData);
+            DrawCircle(tex, (int)tex.width / 2, (int)tex.height / 2, innerRadio, new Color(0, 0, 0));
 
-        //Debug.Log(tex.GetPixel((int)tex.width / 2, 0));
+            //Debug.Log(tex.GetPixel((int)tex.width / 2, 0));
 
-        BuildTubeTexture(tex);
+            BuildTubeTexture(tex);
 
-        // Encode texture into PNG
-        byte[] bytes = result.EncodeToPNG();
+            // Encode texture into PNG
+            byte[] bytes = result.EncodeToPNG();
 
-        // For testing purposes, also write to a file in the project folder
-        File.WriteAllBytes(Application.dataPath + "/Textures/SavedScreen.png", bytes);
+            // For testing purposes, also write to a file in the project folder
+            File.WriteAllBytes(Application.dataPath + "/Textures/SavedScreen.png", bytes);
 
-        result.Apply();
+            result.Apply();
 
-        GetComponent<Renderer>().material.mainTexture = result;
+            GetComponent<Renderer>().material.mainTexture = result;
+            id++;
+        }
     }
 	
 	// Update is called once per frame
