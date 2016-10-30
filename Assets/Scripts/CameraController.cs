@@ -10,6 +10,8 @@ public class CameraController : MonoBehaviour {
 
     private Vector3 pos = new Vector3(0, 0, 0);
 
+    public bool move = true;
+
 	// Use this for initialization
 	void Start () {
         tubeSize = GameObject.FindGameObjectWithTag("TubeCreator").GetComponent<TubeCreator>().tubeSize;
@@ -17,11 +19,13 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (gameObject.transform.position.z < tubeSize) {
-            pos.z += speed / 1000 * Time.deltaTime;
-            transform.Translate(pos);
-        } else {
-            transform.Translate(0, 0, -tubeSize);
+        if (move) {
+            if (gameObject.transform.position.z < tubeSize) {
+                pos.z += speed / 1000 * Time.deltaTime;
+                transform.Translate(pos);
+            } else {
+                transform.Translate(0, 0, -tubeSize);
+            }
         }
 	}
 }

@@ -8,6 +8,8 @@ public class TextureExtractor : MonoBehaviour {
     public int innerRadio = 100;
     private Texture2D result;
 
+    private FailureFinder analyzer;
+
     public int id;
 
     void Start () {
@@ -15,6 +17,10 @@ public class TextureExtractor : MonoBehaviour {
             fileData = File.ReadAllBytes(Application.dataPath + "/Textures/tuboReal" + id.ToString("D3") + ".jpg");
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(fileData);
+
+            analyzer = new FailureFinder();
+            analyzer.analyzeTexture(tex);
+      
             DrawCircle(tex, (int)tex.width / 2, (int)tex.height / 2, innerRadio, new Color(0, 0, 0));
 
             //Debug.Log(tex.GetPixel((int)tex.width / 2, 0));
