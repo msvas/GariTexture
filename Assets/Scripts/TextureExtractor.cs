@@ -15,6 +15,7 @@ public class TextureExtractor : MonoBehaviour {
     void Start () {
         if(File.Exists(Application.dataPath + "/Textures/tuboReal" + id.ToString("D3") + ".jpg")) { 
             fileData = File.ReadAllBytes(Application.dataPath + "/Textures/tuboReal" + id.ToString("D3") + ".jpg");
+            //fileData = File.ReadAllBytes(Application.dataPath + "/Textures/testBinary.png");
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(fileData);
 
