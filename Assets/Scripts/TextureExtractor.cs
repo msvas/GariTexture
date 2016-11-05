@@ -20,7 +20,7 @@ public class TextureExtractor : MonoBehaviour {
             tex.LoadImage(fileData);
 
             analyzer = new FailureFinder();
-            analyzer.analyzeTexture(tex);
+            analyzer.analyzeTexture(tex, innerRadio, 120);
       
             DrawCircle(tex, (int)tex.width / 2, (int)tex.height / 2, innerRadio, new Color(0, 0, 0));
 
