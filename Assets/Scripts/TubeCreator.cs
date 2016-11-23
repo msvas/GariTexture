@@ -24,7 +24,12 @@ public class TubeCreator : MonoBehaviour {
                 Vector3 tubePos = new Vector3(0, 0, zPos);
                 GameObject newTube = (GameObject)Instantiate(tubePrefab, tubePos, Quaternion.FromToRotation(Vector3.up, Vector3.forward));
                 sections.Add(newTube);
+
+                newTube.GetComponent<TextureExtractor>().ySize = newTube.GetComponent<MeshRenderer>().bounds.extents.y * 2;
+                newTube.GetComponent<TextureExtractor>().xSize = newTube.GetComponent<MeshRenderer>().bounds.extents.x * 2;
+
                 newTube.GetComponent<TextureExtractor>().id = tubeId;
+                newTube.GetComponent<TextureExtractor>().creator = this;
                 newTube.GetComponent<Tube>().id = tubeId;
                 newTube.transform.Rotate(tubeRot);
                 tubeRot *= rotationRatio;
@@ -42,9 +47,9 @@ public class TubeCreator : MonoBehaviour {
             return Vector3.zero;
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 }

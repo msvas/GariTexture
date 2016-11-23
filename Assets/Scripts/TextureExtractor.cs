@@ -11,6 +11,11 @@ public class TextureExtractor : MonoBehaviour {
     private FailureFinder analyzer;
 
     public int id;
+    public TubeCreator creator;
+    public int radiusSize = 25;
+
+    public float xSize;
+    public float ySize;
 
     void Start () {
         if(File.Exists(Application.dataPath + "/Textures/tuboReal" + id.ToString("D3") + ".jpg")) { 
@@ -19,8 +24,12 @@ public class TextureExtractor : MonoBehaviour {
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(fileData);
 
-            analyzer = new FailureFinder();
-            analyzer.analyzeTexture(tex, innerRadio, 120);
+            analyzer = GetComponent<FailureFinder>();
+            analyzer.tubeId = id;
+            analyzer.creator = creator;
+            analyzer.xSize = xSize;
+            analyzer.ySize = ySize;
+            analyzer.analyzeTexture(tex, radiusSize);
       
             DrawCircle(tex, (int)tex.width / 2, (int)tex.height / 2, innerRadio, new Color(0, 0, 0));
 
@@ -37,7 +46,7 @@ public class TextureExtractor : MonoBehaviour {
             result.Apply();
 
             GetComponent<Renderer>().material.mainTexture = result;
-            id++;
+            //id++;
         }
     }
 	

@@ -26,6 +26,7 @@ GameObject:
   - 65: {fileID: 65000011898812354}
   - 114: {fileID: 114000010567933170}
   - 54: {fileID: 54000010567332316}
+  - 114: {fileID: 114000013449133806}
   m_Layer: 8
   m_Name: TubeSection
   m_TagString: Tube
@@ -151,3 +152,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   innerRadio: 100
   id: 0
+  creator: {fileID: 0}
+  radiusSize: 22
+  xSize: 0
+  ySize: 0
+--- !u!114 &114000013449133806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010764409472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a603eae55eeb6b046aee1d295e8a4894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creator: {fileID: 0}
+  pointPrefab: {fileID: 1000010063997746, guid: 4d67ec216ad42534a989a568dbec2faa,
+    type: 2}
+  tubeId: 0
+  ySize: 0
+  xSize: 0
