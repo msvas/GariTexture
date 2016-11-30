@@ -295,7 +295,9 @@ MonoBehaviour:
   tubeSize: 10
   rotationRatio: 20
   tubePrefab: {fileID: 1000010764409472, guid: e55b8fe3316ddd54091cff298b04de3e, type: 2}
+  linesRatio: 10
   tubeId: 1
+  mat: {fileID: 2100000, guid: 9efcac1d5b3350d44be0a49bf3a53047, type: 2}
 --- !u!4 &614184988
 Transform:
   m_ObjectHideFlags: 0
@@ -517,6 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d811be151f13b5644995e52127599860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tubecreator: {fileID: 614184986}
 --- !u!135 &1178793651
 SphereCollider:
   m_ObjectHideFlags: 0

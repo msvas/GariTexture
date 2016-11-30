@@ -37,7 +37,7 @@ public class FailureFinder : MonoBehaviour {
         DebugFailures();
     }
 
-    private int[,] buildBinaryImage(Texture2D tex) {
+    public int[,] buildBinaryImage(Texture2D tex) {
         Color[] pixels = tex.GetPixels();
         int[,] binTex = new int[tex.height, tex.width];
         //using (TextWriter tw = new StreamWriter("SQL_U.txt")) {

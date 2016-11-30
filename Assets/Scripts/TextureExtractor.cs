@@ -9,6 +9,7 @@ public class TextureExtractor : MonoBehaviour {
     private Texture2D result;
 
     private FailureFinder analyzer;
+    private LaserAnalyser laser;
 
     public int id;
     public TubeCreator creator;
@@ -24,13 +25,22 @@ public class TextureExtractor : MonoBehaviour {
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(fileData);
 
+            /*
             analyzer = GetComponent<FailureFinder>();
             analyzer.tubeId = id;
             analyzer.creator = creator;
             analyzer.xSize = xSize;
             analyzer.ySize = ySize;
             analyzer.analyzeTexture(tex, radiusSize);
-      
+            */
+
+            laser = GetComponent<LaserAnalyser>();
+            laser.tubeId = id;
+            laser.creator = creator;
+            laser.xSize = xSize;
+            laser.ySize = ySize;
+            laser.LaserAnalysis();
+
             DrawCircle(tex, (int)tex.width / 2, (int)tex.height / 2, innerRadio, new Color(0, 0, 0));
 
             //Debug.Log(tex.GetPixel((int)tex.width / 2, 0));
